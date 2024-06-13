@@ -1,4 +1,4 @@
-package com.filmflare.movie;
+package com.filmflare.movie.Models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
