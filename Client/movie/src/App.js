@@ -2,6 +2,9 @@
 import './App.css';
 import api from './api/axiosConfig';
 import { useState, useEffect } from 'react';
+import { Routes,Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './components/home/Home';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -9,7 +12,7 @@ function App() {
   const getMovies = async () => {
     try {
       const response = await api.get('/api/v1/movies');
-      console.log(response.data);
+      // console.log(response.data);
       setMovies(response.data);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -22,15 +25,11 @@ function App() {
 
   return (
     <div className="App">
-      {movies && movies.length > 0 ? (
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.id}>{movie.title}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No movies found</p>
-      )}
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          <Route path='/' element={<Home/>}></Route>
+        </Route>
+      </Routes>
     </div>
   );
 }
